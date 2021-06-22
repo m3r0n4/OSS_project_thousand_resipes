@@ -32,6 +32,18 @@ def recipe_crawl(crawl_url):
 
 	print(pharse)
 	return pharse
+def want_url(food):
+	recipe_url = url+food+"&query=&cat1=&cat2="+url_cat2+"order"+url_lastcate
+	res_recipe = requests.get(recipe_url)
+	html_recipe = BeautifulSoup(res_recipe.content, "html.parser")
+	tags_recipe = html_recipe.select('a[class="common_sp_link"]')
+#	recipe_url = ""
+	for recipe in tags_recipe:
+		recipe_url = "https://www.10000recipe.com"+recipe["href"]
+		print(recipe_url)
+		break
+	return recipe_url
+
 situation = {'선택안함': '0', '일상': '12', '초스피드': '18', '손님접대': '13', '간식': '17', '다이어트': '21', '야식': '45'}
 if __name__ == '__main__':
 	sit = input()
@@ -49,7 +61,11 @@ if __name__ == '__main__':
 	url2 = '&query=&cat1=&cat2='+choice
 	url_cat2 = '&cat3=&cat4=&fct=&order=accuracy&lastcate='+lastcate
 	url_lastcate = '&dsearch=&copyshot=&scrap=&degree=&portion=&time=&niresource='
+	want_url("떡볶이")
 	new_url = url+"소고기"+"+"+"계란"+url2+url_cat2+url_lastcate
+#	recipe_url = url+"떡볶이"+'&query=&cat1=&cat2='+url_cat2+"order"+url_lastcate
+#	total_url = want_url('떡볶이')
+#	print(total_url)
 	res = requests.get(new_url)
 	html = BeautifulSoup(res.content, "html.parser")
 	tags_title = html.select('div[class="common_sp_caption_tit line2"]')
