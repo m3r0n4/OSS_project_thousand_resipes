@@ -42,7 +42,7 @@ def step3():
         gri2 = request.args.get['gri2']
         gri3 = request.args.get['gri3']
         cate = request.args.get['cate']
-        return render_template('step3.html', gri1 = gri1, gri2 = gri2, gri3 = gri3 cate = cate)
+        return render_template('step3.html', gri1 = gri1, gri2 = gri2, gri3 = gri3, cate = cate)
 
 if __name__ == '__main__':
     app.run()
