@@ -4,7 +4,7 @@ app = FLASK(__name__)
 
 @app.route('/home', methods=["GET", "POST"])
 def home():
-    
+    return render_template('home.html')
 @app.route('/step1', methods=["GET", "POST"])
 def step1():
 
