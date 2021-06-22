@@ -3,28 +3,22 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>step2</title>
+<title>step3</title>
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 	<div id="container">
 		<div id="header"><img src="{{ url_for('static', filename='/imgs/logo.png') }}" height="130px"></div>
-		<div id="main">
-			<h2>
-			<script>
-				var arr = ["달걀", "소고기", "김치", "비엔나"];
-				
-				document.write("현재 냉장고 재료: ");
-				for (var i = 0; i < arr.length; i++) {
-					document.write(arr[i] + " ");
-				}
-			</script>
-			</h2>
+		<div id="main"><h2>어떤 목적의 요리인가요?</h2>
 			<form method="POST" action="/step3">
-				<p align="center">재료 1 <input name="gri1" type="text" size="20"></p>
-				<p align="center">재료 2 <input name="gri2" type="text" size="20"></p>
-				<p align="center">재료 3 <input name="gri3" type="text" size="20"></p>
+				<p align="center"><input name="cate_daily" type="radio" size="20"> 일상 요리</p>
+				<p align="center"><input name="cate_speed" type="radio" size="20"> 초스피드 요리</p>
+				<p align="center"><input name="cate_guest" type="radio" size="20"> 손님을 위한 요리</p>
+				<p align="center"><input name="cate_none" type="radio" size="20"> 선택하지 않음</p>
 				<p align="center"><input type="submit" name="send" value="Next Step!"></p>
+				<input type="hidden" name="gri1" value={{gri1}}>
+				<input type="hidden" name="gri2" value={{gri2}}>
+				<input type="hidden" name="gri3" value={{gri3}}>
 			</form>
 		</div>
 		<div id="footer"><h2>레시피 1000국</h2></div>
