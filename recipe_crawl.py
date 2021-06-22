@@ -31,18 +31,42 @@ if __name__ == '__main__':
 	html = BeautifulSoup(res.content, "html.parser")
 	tags_title = html.select('div[class="common_sp_caption_tit line2"]')
 	tags_link = html.select('a[class="common_sp_link"]')
-#	for i in range(0,10):
+	name = []
+	count_title = 0
 	for i in range(0, len(tags_title)):
+		if count_title == 10:
+			break
 		html_content_title = hfilter(tags_title[i].text)
-		print(html_content_title)		
-#	for i in range(0,10):
-#		html_content_link = tags_link[i]
-#		print(html_content_link)
-#print(new_url)
+	#	print(html_content_title)
+		name.append(html_content_title)
+		count_title = count_title+1		
+	print('\n')
+	link_list = []
 	count = 0
 	for link in tags_link:
 		if count == 10:
 			break
 		link_url = "https://www.10000recipe.com"+link["href"]
-		print(link_url)
+		link_list.append(link_url)
+	#	print(link_url)
 		count = count+1
+	print(name)
+	print(link_list)
+	name_dict = {}
+	link_dict = {}
+	name_dict['name'] = name
+	link_dict['link'] = link_list
+	print(name_dict)
+	print(link_dict)
+	img_count = 0
+	for l in link_list:
+		if img_count == 10:
+			break
+		r = requests.get(l)
+		html_link = BeautifulSoup(r.content, "html.parser")
+#		tags_img = html_link.select("#main_thumbs")	
+		tags_img = html_link.find('img', id = 'main_thumbs')
+#		tags_img = html_link.find_all('img')
+		print(tags_img['src'])
+	#	i = tags_img.get('src')
+	#	print(i)
