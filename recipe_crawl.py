@@ -1,19 +1,18 @@
 #!/usr/bin/python3
 #-*- coding: utf-8 -*-
-
 import re
 import requests
 from bs4 import BeautifulSoup
 from flask import Flask
-
 def hfilter(s):
-	return re.sub(u'[^ \.\,\?\!u3130-\u318f\uac00-\ud7a3]+','',s)
+	return re.sub(u'[^ \.\,\?\!u3130-\u318f\uac00-\ud7a3]+', '', s)
 
-situation = {'선택안함':'0','일상':'12', '초스피드':'18', '손님접대':'13', '간식':'17', '다이어트':'21', '야식':'45'}
+
+situation = {'선택안함': '0', '일상': '12', '초스피드': '18', '손님접대': '13', '간식': '17', '다이어트': '21', '야식': '45'}
 if __name__ == '__main__':
 	sit = input()
 	lastcate = ""
-	choice = "" 
+	choice = ""
 	for key, value in situation.items():
 		if key == sit:
 			choice = value 
@@ -21,7 +20,7 @@ if __name__ == '__main__':
 				lastcate = 'order'
 			else:
 				lastcate = 'cat2'
-			break	
+			break   
 	url = 'https://www.10000recipe.com/recipe/list.html?q='
 	url2 = '&query=&cat1=&cat2='+choice
 	url_cat2 = '&cat3=&cat4=&fct=&order=accuracy&lastcate='+lastcate
@@ -37,9 +36,9 @@ if __name__ == '__main__':
 		if count_title == 10:
 			break
 		html_content_title = hfilter(tags_title[i].text)
-	#	print(html_content_title)
+   #   print(html_content_title)
 		name.append(html_content_title)
-		count_title = count_title+1		
+		count_title = count_title+1  
 	print('\n')
 	link_list = []
 	count = 0
@@ -48,7 +47,7 @@ if __name__ == '__main__':
 			break
 		link_url = "https://www.10000recipe.com"+link["href"]
 		link_list.append(link_url)
-	#	print(link_url)
+   #   print(link_url)
 		count = count+1
 	print(name)
 	print(link_list)
@@ -62,22 +61,48 @@ if __name__ == '__main__':
 	image = []
 	ingredients_dict = {}
 	ingredient = []
+	picked_name = []
+	picked_link = []
+	picked_image = []
 	img_count = 0
 	ing_count = 0
+	ingre_list = []
 	for l in link_list:
 		if img_count == 10:
 			break
 		r = requests.get(l)
 		html_link = BeautifulSoup(r.content, "html.parser")
-#		tags_img = html_link.select("#main_thumbs")	
+#      tags_img = html_link.select("#main_thumbs")   
 		tags_img = html_link.find('img', id = 'main_thumbs')
-#		tags_img = html_link.find_all('img')
+#      tags_img = html_link.find_all('img')
 		img = tags_img['src']
 		image.append(img)
 		image_dict['image'] = image
-		if ing_count == len(link_list):
-			break
-		tags_ing = html_link.select('b[class=")
-		print(tags_ing[ing_count].get_text())
-		ing_count = ing_count+1
+	#	temp_list = []
+		try:
+			divdata = html_link.find('div',{"class":"ready_ingre3"})	
+			redata = divdata.select('ul > a > li')
+		except AttributeError as err:
+			print("no tags\n")
+		else:
+			temp_list = []
+			for pdata in redata:
+				unsplited_ing = pdata.get_text()
+				splited_ing = unsplited_ing.split("\n")
+				unzero = splited_ing[0].replace(" ", "")
+				temp_list.append(unzero)
+			ingredient.append(temp_list)
+			picked_name.append(name[img_count])
+			picked_link.append(l)
+			picked_image.append(image[img_count])
+		img_count = img_count + 1
+		print(temp_list)
+	#	ingredient.append(temp_list)
+	print(ingredient)
 	print(image_dict)
+	print(picked_name)
+	print(picked_link)
+	print(picked_image)
+#def recipe(rec_url):
+	
+	
