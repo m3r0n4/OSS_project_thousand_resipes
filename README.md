@@ -13,8 +13,13 @@ run.sh installs requests, bs4, konlpy, nltk, flask, elasticsearch for python and
 It's default port is 5000. It will be running on that url.
 
 ## Contributors
-Minki Jang([m3r0n4](https://m3r0n4.xyz))
-Eunjin Kim
-Heejeong Kwon
-Seyeon Kim
-Jiyeon Kim
+Minki Jang([m3r0n4](https://m3r0n4.xyz))  
+
+Eunjin Kim  
+
+Heejeong Kwon  
+
+Seyeon Kim  
+
+Jiyeon Kim  
+
