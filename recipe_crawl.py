@@ -7,7 +7,31 @@ from flask import Flask
 def hfilter(s):
 	return re.sub(u'[^ \.\,\?\!u3130-\u318f\uac00-\ud7a3]+', '', s)
 
+def recipe_crawl(crawl_url):
+	pharse = []
+	get_url = requests.get(crawl_url)	
+	html_recipe = BeautifulSoup(get_url.content, "html.parser")
+	tags_recipe = html_recipe.select("#stepdescr1")
+	pharse.append(tags_recipe[0].text)
+	tags_recipe = html_recipe.select("#stepdescr2")
+	pharse.append(tags_recipe[0].text)
+	tags_recipe = html_recipe.select("#stepdescr3")
+	pharse.append(tags_recipe[0].text)
+	try:
+		divdata = html_recipe.select("#stepdescr4")
+	except AttributeError as err:
+		print("no tags\n")
+	else:
+		pharse.append(tags_recipe[0].text)
+	try:
+		divdata = html_recipe.select("#stepdescr5")
+	except AttributeError as err:
+		print("no tags\n")
+	else:
+		pharse.append(tags_recipe[0].text)
 
+	print(pharse)
+	return pharse
 situation = {'선택안함': '0', '일상': '12', '초스피드': '18', '손님접대': '13', '간식': '17', '다이어트': '21', '야식': '45'}
 if __name__ == '__main__':
 	sit = input()
@@ -103,6 +127,6 @@ if __name__ == '__main__':
 	print(picked_name)
 	print(picked_link)
 	print(picked_image)
-#def recipe(rec_url):
-	
+	pharse = []
+	pharse = recipe_crawl('https://www.10000recipe.com/recipe/6947579')
 	
