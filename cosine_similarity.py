@@ -37,15 +37,6 @@ word_d2{}
 sent_list=[]
 sent_list2=[]
 
-def swap(x, i, j):
-    x[i], x[j] = x[j], x[i]
-
-def bubbleSort(x):
-    for size in reversed(range(len(x))):
-        for i in range(size):
-            if x[i] > x[i+1]:
-                swap(x, i, i+1)
-
 
 #먹고 싶은 음식 레시피 크롤링한 것 받아오기(리스트 만들기) =>합칠 때
 def process_new_sentence(s):
@@ -82,15 +73,6 @@ dic={ 'menu':[]
 	'url':[]
 	'food':[]
 	'img':[]}
- #음식 이름과 해당 url 넣어주는 딕셔너리
-
-#크롤링 한 후에 상위 10개 리스트 딕셔너리에 넣어주기!=>for문
-#엘라스틱 서치 한개씩 불러와서 데이터 v1
-#먹고 싶은 레시피 크롤링해서 불러와서 데이터 v2 
-#for문으로 상위 10개 리스트=>10번 반복 (v1만 바꿔가면서 v1과 V2코사인 유사도 계산)
-#max함수 사용하여 비교할 때마다 바꿔주기
-#max값 v1리스트 반환하여 결과 페이지로 넘겨주기
-
 
 es=Elasticsearch([{'host':es_host,'port':es_port}],timeout=100)
 
