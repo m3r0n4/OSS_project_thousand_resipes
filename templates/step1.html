@@ -10,6 +10,7 @@
 	<div id="container">
 		<div id="header"><img src="{{ url_for('static', filename='/imgs/logo.png') }}" height="130px"></div>
 		<div id="main">
+			<h2>사용할 재료 세 가지는 무엇인가요?</h2>	
 			<form method="POST" action="/step2">
 				<p align="center">재료 1 <input name="gri1" type="text" size="20"></p>
 				<p align="center">재료 2 <input name="gri2" type="text" size="20"></p>
@@ -17,7 +18,19 @@
 				<p align="center"><input type="submit" name="send" value="Next Step!"></p>
 			</form>
 		</div>
-		<div id="footer"><h2>레시피 1000국</h2></div>
+		<div id="footer"><div class="rolling_wrap">
+			<a href="https://www.10000recipe.com/recipe/6876357" class="content"><img src="./imgs/poster1.jpg"/></a>
+			<a href="https://www.10000recipe.com/recipe/6903507" class="content"><img src="./imgs/poster2.jpg"/></a>
+			<a href="https://www.10000recipe.com/recipe/6915654" class="content"><img src="./imgs/poster3.jpg"/></a>
+			<a href="https://www.10000recipe.com/recipe/6897261" class="content"><img src="./imgs/poster4.jpg"/></a>
+			<a href="https://www.10000recipe.com/recipe/6896724" class="content"><img src="./imgs/poster5.jpg"/></a>
+			<a href="https://www.10000recipe.com/recipe/6885928" class="content"><img src="./imgs/poster6.jpg"/></a>
+			<a href="https://www.10000recipe.com/recipe/6873683" class="content"><img src="./imgs/poster7.jpg"/></a>
+			<a href="https://www.10000recipe.com/recipe/6884636" class="content"><img src="./imgs/poster8.jpg"/></a>
+			<a href="https://www.10000recipe.com/recipe/6891652" class="content"><img src="./imgs/poster9.jpg"/></a>
+			<a href="https://www.10000recipe.com/recipe/6871961" class="content"><img src="./imgs/poster10.jpg"/></a>
+			<a href="https://www.10000recipe.com/recipe/6912220" class="content"><img src="./imgs/poster11.jpg"/></a>
+		</div><h2>레시피 1000국</h2></div>
 	</div>
 </body>
 </html>
