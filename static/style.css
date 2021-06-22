@@ -11,17 +11,17 @@ h1 {text-align: center;}
 h2 {text-align: center;}
 
 #btn {
-border: 1px solid black;
-border-radius: 5px;
-background-color: #FFE4E4;
-font-family: 'Jua', sans-serif;
-font-size: 30px;
-color: black;
-padding: 5px;
+	border: 1px solid black;
+	border-radius: 5px;
+	background-color: #FFE4E4;
+	font-family: 'Jua', sans-serif;
+	font-size: 30px;
+	color: black;
+	padding: 5px;
 }
 
 #btn:hover {
-background-color: white;
+	background-color: white;
 }
 
 
@@ -37,18 +37,21 @@ background-color: white;
 	grid-area: header;
 	text-align: center;
 	min-height: 130px;
-	background-color: #FAF1E6;}
+	background-color: #FAF1E6;
+}
 
 #container #main {
 	grid-area: main;
 	text-align: center;
 	min-height: calc(100vh - 430px);
-	background-color: #FDFAF6;}
+	background-color: #FDFAF6;
+}
 
 #container #footer {
 	grid-area: footer;
 	min-height: 300px;
-	background-color: #E4EFE7}
+	background-color: #E4EFE7
+}
 
 .rolling_wrap {
 	position: relative;

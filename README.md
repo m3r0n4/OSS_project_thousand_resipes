@@ -13,7 +13,6 @@ run.sh installs requests, bs4, konlpy, nltk, flask, elasticsearch for python and
 It's default port is 5000. It will be running on that url.
 
 ## Notice
-
 Run this server on Chrome only.
 
 Put all of insert value.
