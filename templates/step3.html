@@ -4,11 +4,11 @@
 <head>
 <meta charset="utf-8">
 <title>step3</title>
-<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 	<div id="container">
-		<div id="header"><img src="./imgs/logo.png" height="130px"></div>
+		<div id="header"><img src="{{ url_for('static', filename='/imgs/logo.png') }}" height="130px"></div>
 		<div id="main"><h2>어떤 목적의 요리인가요?</h2>
 			<form method="POST" action="/step4">
 				<p align="center"><input name="cate_daily" type="radio" size="20"> 일상 요리</p>

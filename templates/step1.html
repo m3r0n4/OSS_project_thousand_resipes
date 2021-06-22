@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"> 
 <head>
   <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 <script language="javascript">
 
 var oTbl;
@@ -68,7 +68,7 @@ function frmCheck()
 </head>
 <body>
 	<div id="container">
-		<div id="header"><img src="./imgs/logo.png" height="130px"></div>
+		<div id="header"><img src="{{ url_for('static', filename='/imgs/logo.png') }}" height="130px"></div>
 		<div id="main"><h2>
         냉장고 재료를 입력하세요.</h2>
     <form name="form" method="post" action="/step2">
