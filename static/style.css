@@ -27,7 +27,7 @@ h2 {text-align: center;}
 #container #main {
 	grid-area: main;
 	text-align: center;
-	min-height: 500px;
+	min-height: calc(100vh - 430px);
 	background-color: #FDFAF6;}
 
 #container #footer {
