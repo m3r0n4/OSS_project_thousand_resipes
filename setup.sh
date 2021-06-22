@@ -6,3 +6,5 @@ pip install konlpy
 pip install nltk
 pip install flask
 pip install elasticsearch
+
+./app.py
