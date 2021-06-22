@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8">
+<title>step3</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div id="container">
+		<div id="header"><img src="./imgs/logo.png" height="130px"></div>
+		<div id="main"><h2>어떤 목적의 요리인가요?</h2>
+			<form method="POST" action="/step4">
+				<p align="center"><input name="cate_daily" type="radio" size="20"> 일상 요리</p>
+				<p align="center"><input name="cate_speed" type="radio" size="20"> 초스피드 요리</p>
+				<p align="center"><input name="cate_guest" type="radio" size="20"> 손님을 위한 요리</p>
+				<p align="center"><input name="cate_none" type="radio" size="20"> 선택하지 않음</p>
+				<p align="center"><input type="submit" name="send" value="Next Step!"></p>
+			</form>
+		</div>
+		<div id="footer"><h2>레시피 1000국</h2></div>
+	</div>
+</body>
+</html>

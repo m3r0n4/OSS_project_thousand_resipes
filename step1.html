@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"> 
+<head>
+  <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="style.css">
+<script language="javascript">
+
+var oTbl;
+function insRow() {
+  oTbl = document.getElementById("addTable");
+  var oRow = oTbl.insertRow();
+  oRow.onmouseover=function(){oTbl.clickedRowIndex=this.rowIndex}; 
+  var oCell = oRow.insertCell();
+
+  var frmTag = "<input type=text name=addText style=width:350px; height:20px;> ";
+  oCell.innerHTML = frmTag;
+}
+function removeRow() {
+  oTbl.deleteRow(oTbl.clickedRowIndex);
+}
+
+function frmCheck()
+{
+  var frm = document.form;
+  
+  for( var i = 0; i <= frm.elements.length - 1; i++ ){
+     if( frm.elements[i].name == "addText" )
+     {
+         if( !frm.elements[i].value ){
+             alert("텍스트박스에 값을 입력하세요!");
+                 frm.elements[i].focus();
+   return;
+          }
+      }
+   }
+ }
+</script>
+    <style>
+        .title {
+        font-size: 100px; 
+        text-align: left;
+        border: 100px;
+        margin: 0;
+        font-weight: bold;
+        }
+        .banner {
+            background-color: plum;
+            margin: 0;
+            height: 100px;
+            overflow: 0;
+            font-size: 60px;
+            text-align: center;
+        }
+        .next-step {
+            line-height: 6;
+            font-size: 100px;
+            text-align: center;
+            background-color: orchid;
+            border-radius: 10px;
+            position: relative;
+            left: 700px;
+            top: 100px;
+        }
+        .ingredients {
+            width: 310px;
+            height: 29px;
+        }
+    </style>
+</head>
+<body>
+	<div id="container">
+		<div id="header"><img src="./imgs/logo.png" height="130px"></div>
+		<div id="main"><h2>
+        냉장고 재료를 입력하세요.</h2>
+    <form name="form" method="post" action="/step2">
+        <table width="350" align="center" border="0" cellspacing="5" cellpadding="5">
+          <tr>
+            <td colspan="2" align="center">
+              <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                 <td colspan="5" height="25" align="center">
+                 <input name="addButton" type="button" style="cursor:hand" onClick="insRow()" value="추가">
+                 <font color="#FF0000">*</font>추가버튼을 클릭해 보세요.</td>
+                </tr>
+                <tr>
+                 <td height="25">
+                   <table id="addTable" width="350" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0">
+                    <tr>
+                      <td><input type="text" name="addText" style="width:350px; height:20px;"></td>
+                      <td align="center"></td>
+                    </tr>
+                  </table></td>
+                </tr>
+               </table>
+              </td>
+           </tr>
+         </table>
+         <table width="400" align="center" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td height="10">
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+              <input type="submit" name="send" value="Next Step!" onClick="frmCheck();">
+              </td>
+            </tr>
+         </table>
+        </form>
+		</div>
+		<div id="footer"><h2>레시피 1000국</h2></div>
+	</div>
+</body>
