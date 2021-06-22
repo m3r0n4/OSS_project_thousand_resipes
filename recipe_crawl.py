@@ -58,7 +58,12 @@ if __name__ == '__main__':
 	link_dict['link'] = link_list
 	print(name_dict)
 	print(link_dict)
+	image_dict = {}
+	image = []
+	ingredients_dict = {}
+	ingredient = []
 	img_count = 0
+	ing_count = 0
 	for l in link_list:
 		if img_count == 10:
 			break
@@ -67,6 +72,12 @@ if __name__ == '__main__':
 #		tags_img = html_link.select("#main_thumbs")	
 		tags_img = html_link.find('img', id = 'main_thumbs')
 #		tags_img = html_link.find_all('img')
-		print(tags_img['src'])
-	#	i = tags_img.get('src')
-	#	print(i)
+		img = tags_img['src']
+		image.append(img)
+		image_dict['image'] = image
+		if ing_count == len(link_list):
+			break
+		tags_ing = html_link.select('b[class=")
+		print(tags_ing[ing_count].get_text())
+		ing_count = ing_count+1
+	print(image_dict)
