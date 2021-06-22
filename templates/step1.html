@@ -12,12 +12,12 @@
 	<div id="container">
 		<div id="header"><img src="{{ url_for('static', filename='/imgs/logo.png') }}" height="130px"></div>
 		<div id="main">
-			<h2>사용할 재료 세 가지는 무엇인가요?</h2>	
+			<h1>사용할 재료 세 가지는 무엇인가요?</h1>	
 			<form method="POST" action="/step2">
-				<p align="center">재료 1 <input name="gri1" type="text" size="20"></p>
-				<p align="center">재료 2 <input name="gri2" type="text" size="20"></p>
-				<p align="center">재료 3 <input name="gri3" type="text" size="20"></p>
-				<p align="center"><input type="submit" name="send" value="Next Step!"></p>
+				<h2>재료 1 <input name="gri1" type="text" size="20"></h2>
+				<h2>재료 2 <input name="gri2" type="text" size="20"></h2>
+				<h2>재료 3 <input name="gri3" type="text" size="20"><h2>
+				<p align="center"><input id="btn" type="submit" name="send" value="Next Step!"></p>
 			</form>
 		</div>
 		<div id="footer"><div class="rolling_wrap">

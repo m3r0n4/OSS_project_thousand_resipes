@@ -11,13 +11,13 @@
 <body>
 	<div id="container">
 		<div id="header"><img src="{{ url_for('static', filename='/imgs/logo.png') }}" height="130px"></div>
-		<div id="main"><h2>어떤 목적의 요리인가요?</h2>
+		<div id="main"><h1>어떤 목적의 요리인가요?</h1>
 			<form method="POST" action="/step3">
-				<p align="center"><input name="cate" id="cate_daily" type="radio" value="일상 요리" size="20"> 일상 요리</p>
-				<p align="center"><input name="cate" id="cate_speed" type="radio" value="초스피드 요리" size="20"> 초스피드 요리</p>
-				<p align="center"><input name="cate" id="cate_guest" type="radio" value="손님을 위한 요리" size="20"> 손님을 위한 요리</p>
-				<p align="center"><input name="cate" id="cate_none" type="radio" value="선택하지 않음" size="20"> 선택하지 않음</p>
-				<p align="center"><input type="submit" name="send" value="Next Step!"></p>
+				<h2><input name="cate" id="cate_daily" type="radio" value="일상 요리" size="20"> 일상 요리</h2>
+				<h2><input name="cate" id="cate_speed" type="radio" value="초스피드 요리" size="20"> 초스피드 요리</h2>
+				<h2><input name="cate" id="cate_guest" type="radio" value="손님을 위한 요리" size="20"> 손님을 위한 요리</h2>
+				<h2><input name="cate" id="cate_none" type="radio" value="선택하지 않음" size="20"> 선택하지 않음</h2>
+				<p align="center"><input id="btn" type="submit" name="send" value="Next Step!"></p>
 				<input type="hidden" name="gri1" value={{gri1}}>
 				<input type="hidden" name="gri2" value={{gri2}}>
 				<input type="hidden" name="gri3" value={{gri3}}>
