@@ -5,6 +5,8 @@
 <meta charset="utf-8">
 <title>step4</title>
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+<script type="text/javascript" src="{{ url_for('static', filename='./js/jquery-3.1.0.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='/js/rolling.js') }}"></script>
 </head>
 <body>
 	<div id="container">
@@ -20,17 +22,17 @@
 			</form>
 		</div>
 		<div id="footer"><div class="rolling_wrap">
-			<a href="https://www.10000recipe.com/recipe/6876357" class="content"><img src="./imgs/poster1.jpg"/></a>
-			<a href="https://www.10000recipe.com/recipe/6903507" class="content"><img src="./imgs/poster2.jpg"/></a>
-			<a href="https://www.10000recipe.com/recipe/6915654" class="content"><img src="./imgs/poster3.jpg"/></a>
-			<a href="https://www.10000recipe.com/recipe/6897261" class="content"><img src="./imgs/poster4.jpg"/></a>
-			<a href="https://www.10000recipe.com/recipe/6896724" class="content"><img src="./imgs/poster5.jpg"/></a>
-			<a href="https://www.10000recipe.com/recipe/6885928" class="content"><img src="./imgs/poster6.jpg"/></a>
-			<a href="https://www.10000recipe.com/recipe/6873683" class="content"><img src="./imgs/poster7.jpg"/></a>
-			<a href="https://www.10000recipe.com/recipe/6884636" class="content"><img src="./imgs/poster8.jpg"/></a>
-			<a href="https://www.10000recipe.com/recipe/6891652" class="content"><img src="./imgs/poster9.jpg"/></a>
-			<a href="https://www.10000recipe.com/recipe/6871961" class="content"><img src="./imgs/poster10.jpg"/></a>
-			<a href="https://www.10000recipe.com/recipe/6912220" class="content"><img src="./imgs/poster11.jpg"/></a>
+			<a href="https://www.10000recipe.com/recipe/6876357" class="content"><img src="{{ url_for('static', filename='/imgs/poster1.jpg') }}"/></a>
+			<a href="https://www.10000recipe.com/recipe/6903507" class="content"><img src="{{ url_for('static', filename='/imgs/poster2.jpg') }}"/></a>
+			<a href="https://www.10000recipe.com/recipe/6915654" class="content"><img src="{{ url_for('static', filename='/imgs/poster3.jpg') }}"/></a>
+			<a href="https://www.10000recipe.com/recipe/6897261" class="content"><img src="{{ url_for('static', filename='/imgs/poster4.jpg') }}"/></a>
+			<a href="https://www.10000recipe.com/recipe/6896724" class="content"><img src="{{ url_for('static', filename='/imgs/poster5.jpg') }}"/></a>
+			<a href="https://www.10000recipe.com/recipe/6885928" class="content"><img src="{{ url_for('static', filename='/imgs/poster6.jpg') }}"/></a>
+			<a href="https://www.10000recipe.com/recipe/6873683" class="content"><img src="{{ url_for('static', filename='/imgs/poster7.jpg') }}"/></a>
+			<a href="https://www.10000recipe.com/recipe/6884636" class="content"><img src="{{ url_for('static', filename='/imgs/poster8.jpg') }}"/></a>
+			<a href="https://www.10000recipe.com/recipe/6891652" class="content"><img src="{{ url_for('static', filename='/imgs/poster9.jpg') }}"/></a>
+			<a href="https://www.10000recipe.com/recipe/6871961" class="content"><img src="{{ url_for('static', filename='/imgs/poster10.jpg') }}"/></a>
+			<a href="https://www.10000recipe.com/recipe/6912220" class="content"><img src="{{ url_for('static', filename='/imgs/poster11.jpg') }}"/></a>
 		</div><h2>레시피 1000국</h2></div>
 	</div>
 </body>
