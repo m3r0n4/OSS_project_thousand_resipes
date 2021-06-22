@@ -78,6 +78,18 @@ def make_vector(i):
 		v.append(val)
 	return v
 
+def make_result(i1, i2, i3)
+	name=es.get(index=foodname,doc_type='menu',id=1)
+	link=es.get(index=foodname,doc_type='url',id=1)
+	image=es.get(index=foodname,doc_type='img',id=1)
+	ing=es.get(index=foodname,doc_type='food',id=1)
+
+	result1 = [ name[i1], link[i1], image[i1], ing[i1] ]
+	result2 = [ name[i2], link[i2], image[i2], ing[i2] ]
+	result3 = [ name[i3], link[i3], image[i3], ing[i3] ]
+
+	return result1, result2, result3
+
 dic={ 'menu':[]
 	'url':[]
 	'food':[]
@@ -134,11 +146,9 @@ try :
 		elif (now > s3):
 			idx3=i
 			s3=now
+
+	return make_result(idx1, idx2, idx3)
 		
-
-index=index_name
-res=es.get(index=foodname,doc_type='food',id=1)
-
 
 
 	
