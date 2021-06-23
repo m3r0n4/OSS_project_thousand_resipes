@@ -9,11 +9,14 @@
 ### 1. ./run.sh
 * run.sh installs requests, bs4, konlpy, nltk, flask, elasticsearch for python and runs app.py (It runs server.)
 
-### 2. http://127.0.0.1:5000/
+### 2. Run Elasticsearch
+* Change working directory to elasticsearch, and run elasticsearch(./bin/elasticsearch)
+
+### 3. http://127.0.0.1:5000/
 * It's default port is 5000. It will be running on that url.
 
 ## Notice
-* Run this server on Chrome only.
+* Run this web page on Chromium based browser.
 
 * Put all of insert value.
 
