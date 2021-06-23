@@ -67,6 +67,17 @@ def make_vector(s):
 		v.append(val)
 	return v
 
+def make_vector2(s):
+        v=[]
+        tokenized=okt.morphs(s)
+        for w in word_d2.keys():
+                val=0
+                for t in tokenized:
+                        if t==w:
+                                val+=1
+                v.append(val)
+        return v
+
 def want_url(food):
 	lastcate = ""	
 	url = 'https://www.10000recipe.com/recipe/list.html?q='
@@ -75,20 +86,32 @@ def want_url(food):
 	recipe_url = url+food+"&query=&cat1=&cat2="+url_cat2+"order"+url_lastcate
 	res_recipe = requests.get(recipe_url)
 	html_recipe = BeautifulSoup(res_recipe.content, "html.parser")
-	tags_recipe = html_recipe.select_one('.common_sp_thumb > .common_sp_link')
-	print(tags_recipe["href"])
-	return 'https://www.10000recipe.com'+ tags_recipe["href"]
+	tag_recipe = html_recipe.select_one('.common_sp_thumb > .common_sp_link')
+	print(tag_recipe["href"])
+	return 'https://www.10000recipe.com'+ tag_recipe["href"]
 
 def recipe_crawl(crawl_url):
 	pharse = []
 	get_url = requests.get(crawl_url)	
 	html_recipe = BeautifulSoup(get_url.content, "html.parser")
-	tags_recipe = html_recipe.select("#stepdescr1")
-	pharse.append(tags_recipe[0].text)
-	tags_recipe = html_recipe.select("#stepdescr2")
-	pharse.append(tags_recipe[0].text)
-	tags_recipe = html_recipe.select("#stepdescr3")
-	pharse.append(tags_recipe[0].text)
+	try:
+		divdata = html_recipe.select("#stepdescr1")
+	except AttributeError as err:
+		print("no tags\n")	
+	else:
+		pharse.append(divdata[0].text)	
+	try:
+		divdata = html_recipe.select("#stepdescr2")
+	except AttributeError as err:
+		print("no tags\n")
+	else:
+		pharse.append(divdata[0].text) 
+	try:
+		divdata = html_recipe.select("#stepdescr333")
+	except AttributeError as err:
+		print("no tags\n")
+	else:
+		pharse.append(divdata[0].text) 
 	try:
 		divdata = html_recipe.select("#stepdescr4")
 	except AttributeError as err:
@@ -107,10 +130,12 @@ def recipe_crawl(crawl_url):
 	return total
 
 def make_result(i1, i2, i3):
-	name=es.get(index=foodname,doc_type='menu',id=1)
-	link=es.get(index=foodname,doc_type='url',id=1)
-	image=es.get(index=foodname,doc_type='img',id=1)
-	ing=es.get(index=foodname,doc_type='food',id=1)
+	ris=es.get(index='foodname',doc_type='url',id=1)
+	ris=ris['_source']
+	name=ris['menu']
+	link=ris['url']
+	image=ris['img']
+	ing=ris['food']
 
 	result1 = [ name[i1], link[i1], image[i1], ing[i1] ]
 	result2 = [ name[i2], link[i2], image[i2], ing[i2] ]
@@ -136,13 +161,15 @@ def make_es(menu, url, food, img, want):
 	idx1=0
 	idx2=0
 	idx3=0
-	res=es.get(index=foodname,doc_type='url',id=1)
+	ris=es.get(index='foodname',doc_type='url',id=1)
+	ris=ris['_source']
+	res=ris['url']
 
 	for i in range(0,len(res),1):
 		craw_list=recipe_crawl(res[i])
 		cleaning(craw_list)
 		process_new_sentence2(craw_list)
-		v2=make_vector(s)
+		v2=make_vector2(craw_list)
 
 		now=cos_similarity(v1,v2)
 
