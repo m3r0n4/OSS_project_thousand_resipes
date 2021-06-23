@@ -14,21 +14,21 @@ def recipe_crawl(crawl_url):
 	temp = ""
 	global result
 	result = []
-	temp = html_recipe.find(id="stepdescr1").get_text()
-	if temp == "":
+	temp = html_recipe.find(id="stepdescr1")
+	if temp == "" or temp == " ":
 		return 
 	result.append(temp)
-	temp = html_recipe.find(id="stepdescr2").get_text()
-	if temp == "":
+	temp = html_recipe.find(id="stepdescr2")
+	if temp == "" or temp == " ":
 	 	return 
 	result.append(temp)
-	temp = html_recipe.find(id="stepdescr3").get_text()
-	if temp == "":
+	temp = html_recipe.find(id="stepdescr3")
+	if temp == "" or  temp == " ":
 		return 
 	result.append(temp)
 	tot_result = ""
 	for i in result:
-		tot_result += i
+		tot_result += i.get_text()
 	return tot_result 
 #	try: 
 #		divdata = html_recipe.select("#stepdescr1")
