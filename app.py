@@ -129,9 +129,7 @@ def recipe_crawl(crawl_url):
 		total += i
 	return total
 
-def make_result(i1, i2, i3):
-	ris=es.get(index='foodname',doc_type='url',id=1)
-	ris=ris['_source']
+def make_result(ris, i1, i2, i3):
 	name=ris['menu']
 	link=ris['url']
 	image=ris['img']
@@ -189,7 +187,7 @@ def make_es(menu, url, food, img, want):
 			idx3=i
 			s3=now
 	
-	return make_result(idx1, idx2, idx3)
+	return make_result(ris, idx1, idx2, idx3)
 
 def crawling(gri1, gri2, gri3, cate, want):
 	situation = {'선택안함': '0', '일상': '12', '초스피드': '18', '손님접대': '13'}
