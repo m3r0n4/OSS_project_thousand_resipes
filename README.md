@@ -16,12 +16,15 @@
 * It's default port is 5000. It will be running on that url.
 
 ### 4. YouTube Link
-* https://youtu.be/5PFzwCfDo0A
+* https://youtu.be/WlXCwI9rJDc
 
 ## Notice
 * Run this web page on Chromium based browser.
 
 * Put all of insert value.
+
+## Reference
+* image rolling banner: https://greatps1215.tistory.com/13
 
 ## Contributors
 * Minki Jang([m3r0n4](https://www.notion.so/e3e14db05747481ea486ee01e3f04775))  
