@@ -11,27 +11,63 @@ def recipe_crawl(crawl_url):
 	pharse = []
 	get_url = requests.get(crawl_url)	
 	html_recipe = BeautifulSoup(get_url.content, "html.parser")
-	tags_recipe = html_recipe.select("#stepdescr1")
-	pharse.append(tags_recipe[0].text)
-	tags_recipe = html_recipe.select("#stepdescr2")
-	pharse.append(tags_recipe[0].text)
-	tags_recipe = html_recipe.select("#stepdescr3")
-	pharse.append(tags_recipe[0].text)
-	try:
-		divdata = html_recipe.select("#stepdescr4")
-	except AttributeError as err:
-		print("no tags\n")
-	else:
-		pharse.append(tags_recipe[0].text)
-	try:
-		divdata = html_recipe.select("#stepdescr5")
-	except AttributeError as err:
-		print("no tags\n")
-	else:
-		pharse.append(tags_recipe[0].text)
-
-	print(pharse)
-	return pharse
+	temp = ""
+	global result
+	result = []
+	temp = html_recipe.find(id="stepdescr1").get_text()
+	if temp == "":
+		return 
+	result.append(temp)
+	temp = html_recipe.find(id="stepdescr2").get_text()
+	if temp == "":
+	 	return 
+	result.append(temp)
+	temp = html_recipe.find(id="stepdescr3").get_text()
+	if temp == "":
+		return 
+	result.append(temp)
+	tot_result = ""
+	for i in result:
+		tot_result += i
+	return tot_result 
+#	try: 
+#		divdata = html_recipe.select("#stepdescr1")
+#	except AttributeError as err:
+#		print("no tags\n")
+#	else:
+#		divdata = html_recipe.select("#stepdescr1")
+#		pharse.append(divdata[0].text)
+#	try: 	
+#		divdata = html_recipe.select("#stepdescr2")
+#	except AttributeError as err:
+#		print("no tags\n")
+##	else:
+##		divdata = html_recipe.select("#stepdescr2")
+#		pharse.append(divdata[0].text)
+#	try: 
+#		divdata = html_recipe.select("#stepdescr3")
+#	except AttributeError as err:
+#		print("no tags\n")
+#	else:
+#		divdata = html_recipe.select("#stepdescr3")
+#		pharse.append(divdata[0].text)
+#	try:
+#		divdata = html_recipe.select("#stepdescr4")
+#	except AttributeError as err:
+#		print("no tags\n")
+#	else:
+#		divdata = html_recipe.select("#stepdescr4")
+#		pharse.append(divdata[0].text)
+#	try:
+#		divdata = html_recipe.select("#stepdescr5")
+#	except AttributeError as err:
+#		print("no tags\n")
+#	else:
+#		divdata = html_recipe.select("#stepdescr5")
+	#	pharse.append(divdata[0].text)
+#
+	#print(pharse)
+#	return total
 def want_url(food):
 	recipe_url = url+food+"&query=&cat1=&cat2="+url_cat2+"order"+url_lastcate
 	res_recipe = requests.get(recipe_url)
@@ -139,6 +175,5 @@ if __name__ == '__main__':
 	print(picked_name)
 	print(picked_link)
 	print(picked_image)
-	pharse = []
-	pharse = recipe_crawl('https://www.10000recipe.com/recipe/6947579')
-	
+	tot_result = recipe_crawl('https://www.10000recipe.com/recipe/6947579')
+	print(tot_result)
