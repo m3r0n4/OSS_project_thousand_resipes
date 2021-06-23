@@ -11,42 +11,19 @@
 </head>
 <body>
 	<div id="container">
-		<div id="header"><img src="./imgs/logo.png" height="130px"></div>
+		<div id="header"><img src="{{ url_for('static', filename='/imgs/logo.png') }}" height="130px"></div>
 		<div id="main">
 			<form method="POST" action="/home">
 			<h1>오늘의 추천 레시피는?</h1>
 			<p align="center">* 사진을 누르면 레시피로 이동합니다.</p><br>
-			<a href="{{ link2 }}"><img src="{{ img1 }}"></a><br>
+			<a href="{{ link2 }}"><img src="{{ img1 }}" style="width: 400px; height: auto;"></a><br>
 			<h2>{{ name1 }}</h2>
-			<script>
-				var arr = {{ gri1 }};
-				
-				document.write("재료: ");
-				for (var i = 0; i < arr.length; i++) {
-					document.write(arr[i] + " ");
-				}
-			</script>
 			<br><br>
-			<a href="{{ link2 }}"><img src="{{ img2 }}"></a><br>
+			<a href="{{ link2 }}"><img src="{{ img2 }}" style="width: 400px; height: auto;"></a><br>
 			<h2>{{ name2 }}</h2>
-			<script>
-				var arr = {{ gri2 }};
-				
-				document.write("재료: ");
-				for (var i = 0; i < arr.length; i++) {
-					document.write(arr[i] + " ");
-				}
-			</script>
 			<br><br>
-			<a href="{{ link3 }}"><img src="{{ img3 }}"></a><br>
+			<a href="{{ link3 }}"><img src="{{ img3 }}" style="width: 400px; height: auto;"></a><br>
 			<h2>{{ name3 }}</h2>
-			<script>
-				var arr = {{ gri3 }};
-				
-				document.write("재료: ");
-				for (var i = 0; i < arr.length; i++) {
-					document.write(arr[i] + " ");
-				}
 			</script>
 			<p align="center"><button id="btn" type="submit">레시피 다시 찾기</button></p>
 			</form>

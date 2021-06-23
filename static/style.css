@@ -4,7 +4,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');
 
 html {margin: 0; height: 100%; overflow: hidden;}
-body {position:relative; margin: 0; height: 100%; overflow: hidden; font-family: 'Jua', sans-serif;}
+body {position:relative; margin: 0; height: 100%; overflow: auto; font-family: 'Jua', sans-serif;}
 p { font-family: 'Jua', sans-serif; }
 
 h1 {text-align: center;}
