@@ -68,6 +68,14 @@ def make_vector(i):
 		v.append(val)
 	return v
 
+def want_url(food):
+	recipe_url = url+food+"&query=&cat1=&cat2="+url_cat2+"order"+url_lastcate
+	res_recipe = requests.get(recipe_url)
+	html_recipe = BeautifulSoup(res_recipe.content, "html.parser")
+	tags_recipe = html_recipe.select_one('.common_sp_thumb > .common_sp_link')
+	print(tags_recipe["href"])
+	return 'https://www.10000recipe.com'+ tags_recipe["href"]
+
 def recipe_crawl(crawl_url):
 	pharse = []
 	get_url = requests.get(crawl_url)	
@@ -243,9 +251,9 @@ def crawling(gri1, gri2, gri3, cate, want):
 		print(temp_list)
 	#	ingredient.append(temp_list)
 
-	want_url = "https://www.10000recipe.com/recipe/6830006"
+	want_link = want_url(want)
 
-	return make_es(picked_name, picked_link, ingredient, picked_image, want_url)
+	return make_es(picked_name, picked_link, ingredient, picked_image, want_link)
 
 
 app = Flask(__name__)
