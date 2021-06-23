@@ -19,7 +19,7 @@ es_port="9200"
 def hfilter(s):
 	return re.sub(u'[^ \.\,\?\!u3130-\u318f\uac00-\ud7a3]+', '', s)
 
-def cleansing(text):  # 특수문자 제거 함수
+def cleaning(text):  # 특수문자 제거 함수
 	cleaned_text = re.sub('[-=+©,#/\?:;\{\}^$.@—{*\"※;»~&}%ㆍ!』\\‘|\(\)\[\]\<\>`\'…》]', '', text).replace("’", "").split()
 
 	return cleaned_text
@@ -56,9 +56,8 @@ def process_new_sentence2(s):
 			word_d2[word]=0
 		word_d2[word]+=1
 
-def make_vector(i):
+def make_vector(s):
 	v=[]
-	s=sent_list[i]	
 	tokenized=okt.morphs(s)
 	for w in word_d.keys():
 		val=0
@@ -69,6 +68,10 @@ def make_vector(i):
 	return v
 
 def want_url(food):
+	lastcate = ""	
+	url = 'https://www.10000recipe.com/recipe/list.html?q='
+	url_cat2 = '&cat3=&cat4=&fct=&order=accuracy&lastcate='+lastcate
+	url_lastcate = '&dsearch=&copyshot=&scrap=&degree=&portion=&time=&niresource='
 	recipe_url = url+food+"&query=&cat1=&cat2="+url_cat2+"order"+url_lastcate
 	res_recipe = requests.get(recipe_url)
 	html_recipe = BeautifulSoup(res_recipe.content, "html.parser")
@@ -98,8 +101,10 @@ def recipe_crawl(crawl_url):
 		print("no tags\n")
 	else:
 		pharse.append(tags_recipe[0].text)
-
-	return pharse
+	total = ""
+	for i in pharse:
+		total += i
+	return total
 
 def make_result(i1, i2, i3):
 	name=es.get(index=foodname,doc_type='menu',id=1)
@@ -121,11 +126,10 @@ def make_es(menu, url, food, img, want):
 	es=Elasticsearch([{'host':es_host,'port':es_port}],timeout=100)
 	#es.index(index='foodname',doc_type='food',id=1,body=dic)
 	es.index(index='foodname',doc_type='url',id=1,body=dic)
-	index=index_name
 	want_list=recipe_crawl(want)
 	cleaning(want_list)
 	process_new_sentence(want_list)
-	v1=make_vector()
+	v1=make_vector(want_list)
 	s1=0
 	s2=0
 	s3=0
@@ -138,7 +142,7 @@ def make_es(menu, url, food, img, want):
 		craw_list=recipe_crawl(res[i])
 		cleaning(craw_list)
 		process_new_sentence2(craw_list)
-		v2=make_vector()
+		v2=make_vector(s)
 
 		now=cos_similarity(v1,v2)
 
