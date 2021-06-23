@@ -28,8 +28,10 @@ def cleaning(text):  # 특수문자 제거 함수
 
 #cosine 계산 함
 def cos_similarity(v1,v2):
-	dotpro=numpy.dot(v1,v2)
-	norm=(numpy.linalg.norm(v1)*numpy.linalg.norm(v2))
+	a = numpy.array(v1)
+	b = numpy.array(v2)	
+	dotpro=numpy.dot(a,b)
+	norm=(numpy.linalg.norm(a)*numpy.linalg.norm(b))
 	similarity=dotpro/norm
 
 	return similarity
@@ -94,39 +96,23 @@ def recipe_crawl(crawl_url):
 	pharse = []
 	get_url = requests.get(crawl_url)	
 	html_recipe = BeautifulSoup(get_url.content, "html.parser")
-	try:
-		divdata = html_recipe.select("#stepdescr1")
-	except AttributeError as err:
-		print("no tags\n")	
-	else:
-		pharse.append(divdata[0].text)	
-	try:
-		divdata = html_recipe.select("#stepdescr2")
-	except AttributeError as err:
-		print("no tags\n")
-	else:
-		pharse.append(divdata[0].text) 
-	try:
-		divdata = html_recipe.select("#stepdescr333")
-	except AttributeError as err:
-		print("no tags\n")
-	else:
-		pharse.append(divdata[0].text) 
-	try:
-		divdata = html_recipe.select("#stepdescr4")
-	except AttributeError as err:
-		print("no tags\n")
-	else:
-		pharse.append(tags_recipe[0].text)
-	try:
-		divdata = html_recipe.select("#stepdescr5")
-	except AttributeError as err:
-		print("no tags\n")
-	else:
-		pharse.append(tags_recipe[0].text)
+	temp = ""
+	result = []
+	temp = html_recipe.find(id="stepdescr1")
+	if temp == "":
+		return
+	result.append(temp)
+	temp = html_recipe.find(id="stepdescr2")
+	if temp == "":
+		return
+	result.append(temp)
+	temp = html_recipe.find(id="stepdescr3")
+	if temp == "":
+		return
+	result.append(temp)	
 	total = ""
-	for i in pharse:
-		total += i
+	for i in result:
+		total += str(i)
 	return total
 
 def make_result(ris, i1, i2, i3):
@@ -149,6 +135,10 @@ def make_es(menu, url, food, img, want):
 	es=Elasticsearch([{'host':es_host,'port':es_port}],timeout=100)
 	#es.index(index='foodname',doc_type='food',id=1,body=dic)
 	es.index(index='foodname',doc_type='url',id=1,body=dic)
+	want_list=recipe_crawl(want)
+	cleaning(want_list)
+	process_new_sentence(want_list)
+	v1=make_vector(want_list)	
 	s1=0
 	s2=0
 	s3=0
@@ -160,26 +150,40 @@ def make_es(menu, url, food, img, want):
 	ris=ris['_source']
 	res=ris['url']
 
+	index = 0 
+
 	for i in range(0,len(res),1):
-		now=now+0.05
+		craw_list=recipe_crawl(res[i])
+		cleaning(craw_list)
+		process_new_sentence2(craw_list)
+		v2=make_vector2(craw_list)
+
+		if (len(v1) > len(v2)):
+			for i in range(len(v2),len(v1),1):
+				v2.append(0)
+		elif (len(v2) > len(v1)):
+			for i in range(len(v1),len(v2),1):
+				v1.append(0)
+
+		now=cos_similarity(v1,v2)		
 
 		if (now > s1):
 			idx3=idx2
 			s3=s2
 			idx2=idx1
 			s2=s1
-			idx1=i
+			idx1=index
 			s1=now
 		elif (now > s2):
 			idx3=idx2
 			s3=s2
-			idx2=i
+			idx2=index
 			s2=now
 		elif (now > s3):
-			idx3=i
+			idx3=index
 			s3=now
-	
-	return make_result(ris, 1, 2, 3)
+		index += 1	
+	return make_result(ris, idx1, idx2, idx3)
 
 def crawling(gri1, gri2, gri3, cate, want):
 	situation = {'선택안함': '0', '일상': '12', '초스피드': '18', '손님접대': '13'}
